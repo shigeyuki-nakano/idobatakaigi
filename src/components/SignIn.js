@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -55,8 +56,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignInSide(props) {
-  const {name, setName} = props;  
+export const SignInSide = (props) => {
+  const {setName} = props;
+  const [string, setString] = React.useState('');
+  const history = useHistory();
+
   const classes = useStyles();
 
   return (
@@ -82,15 +86,26 @@ export default function SignInSide(props) {
               name="name"
               autoComplete="name"
               autoFocus
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setString(e.target.value)}
+              onKeyDown={(e) => {
+                  if(e.key === 'Enter') {
+                        e.preventDefault();
+                        setName(string);
+                        history.push('/talk');
+                  }
+              }}
             />
             <Button
-              type="submit"
+              type="button"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
-              disabled={name === ''}
+              disabled={string === ''}
+              onClick={() => {
+                    setName(string);
+                    history.push('/talk')
+              }}
             >
               はじめる
             </Button>

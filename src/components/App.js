@@ -1,13 +1,27 @@
 import React, { useState } from 'react';
-import SignIn from './SignIn';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
+import { SignInSide } from './SignIn';
+import { Talk } from './Talk';
 
 export default () => {
   const [name, setName] = useState('');
-  console.log(name);
   return (
-    <SignIn
-      name={name}
-      setName={setName}
-    />
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <SignInSide
+            setName={setName}
+          />
+        </Route>
+        <Route exact path="/talk">
+          <Talk name={name}/>
+        </Route>
+      </Switch>
+    </Router>
   )
 };
