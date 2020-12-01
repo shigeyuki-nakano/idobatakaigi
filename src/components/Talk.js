@@ -5,6 +5,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core';
 import { MsgField } from './MsgField';
 import { MsgFieldList } from './MsgFieldList';
+import { Input } from './Input';
+
+import { pushMessage } from '../.firebase-config';
+
 
 const useStyles = makeStyles({
     root: {
@@ -15,9 +19,7 @@ const useStyles = makeStyles({
 })
 export const Talk = (props) => {
     const {name} = props;
-    const [string, setString] = React.useState('');
     const [talk, setTalk] = React.useState('');
-    const [dammy, setDammy] = React.useState([{name: '', talk: ''}]);
     const history = useHistory();
     const classes = useStyles();
 
@@ -29,8 +31,7 @@ export const Talk = (props) => {
 
     React.useEffect(() => {
         if(talk !== "") {
-            setDammy([...dammy, {name: name, talk: talk}]);
-            setString("");
+            pushMessage({name: name, text: talk});
             // talkの更新を受け取りたいためtalkも空にする
             setTalk("");
         }
@@ -38,22 +39,15 @@ export const Talk = (props) => {
     return (
         <div className={classes.root}>
             <MsgFieldList>
-                {dammy.map((d, i) => (
-                    <MsgField key={i}>
-                        {i !== 0 && (
-                                <div>
-                                    {d.name}
-                                    {d.talk}
-                                </div>
-                            )
-                        }
-                    </MsgField>
-                ))}
+                {/* {dammy.map((d, i) => (
+                    <MsgField
+                        key={i}
+                        name={d.name}
+                        msg={d.talk}
+                    />
+                ))} */}
             </MsgFieldList>
-            <input
-                type="text"
-                onChange={(e) => setString(e.target.value)}
-                value={string}
+            <Input
                 onKeyDown={(e) => {
                     if(e.key === 'Enter' && e.target.value !== ""){
                         e.preventDefault();
