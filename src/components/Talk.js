@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import config from '../config.json';
 
 export const Talk = (props) => {
     const {name} = props;
@@ -9,10 +10,10 @@ export const Talk = (props) => {
     const history = useHistory();
 
     React.useEffect(() => {
-        if(name === "") {
+        if(name === "" && ! config.signInEnable) {
             history.push('/');
         }
-    })
+    }, [])
 
     React.useEffect(() => {
         if(talk !== "") {
