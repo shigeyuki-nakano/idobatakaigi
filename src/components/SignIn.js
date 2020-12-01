@@ -55,7 +55,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignInSide() {
+export default function SignInSide(props) {
+  const {setName} = props;  
   const classes = useStyles();
 
   return (
@@ -81,6 +82,7 @@ export default function SignInSide() {
               name="name"
               autoComplete="name"
               autoFocus
+              onChange={(e) => setName(e.target.value)}
             />
             <Button
               type="submit"
