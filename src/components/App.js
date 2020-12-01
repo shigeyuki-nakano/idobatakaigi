@@ -6,6 +6,7 @@ export default () => {
   console.log(name);
   return (
     <SignIn
+      name={name}
       setName={setName}
     />
   )

@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignInSide(props) {
-  const {setName} = props;  
+  const {name, setName} = props;  
   const classes = useStyles();
 
   return (
@@ -90,6 +90,7 @@ export default function SignInSide(props) {
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled={name === ''}
             >
               はじめる
             </Button>
