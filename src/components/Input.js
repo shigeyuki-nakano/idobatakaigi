@@ -1,20 +1,14 @@
 import React from 'react';
 
-export const Input = (props) => {
-    const [text, setText] = React.useState('');
-    const {onKeyDown} = props;
+export const Input = ({onKeyDown, setText, text, autoFocus, inputRef}) => {
 
     return (
         <input
+            ref={(input) => inputRef.current = input}
+            autoFocus={autoFocus}
             type="text"
-            onKeyDown={(e) => {
-                onKeyDown(e);
-                if(e.key === 'Enter' && e.target.value !== "") {
-                    e.preventDefault();
-                    setText("");
-                }
-            }}
-            onChange={(e) => setText(e.target.value)}
+            onKeyDown={onKeyDown}
+            onChange={setText}
             value={text}
         />
     )
