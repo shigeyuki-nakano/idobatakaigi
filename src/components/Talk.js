@@ -44,15 +44,7 @@ export const Talk = (props) => {
 
     return (
         <div className={classes.root}>
-            <MsgFieldList>
-                {/* {dammy.map((d, i) => (
-                    <MsgField
-                        key={i}
-                        name={d.name}
-                        msg={d.talk}
-                    />
-                ))} */}
-            </MsgFieldList>
+            <MsgFieldList/>
             <Input
                 inputRef={inputEl}
                 autoFocus
